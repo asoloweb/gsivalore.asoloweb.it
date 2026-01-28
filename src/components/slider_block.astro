@@ -25,6 +25,14 @@ const {
 	href = '',
 } = Astro.props;
 
+// Add preload link for first slide image in head
+function addPreloadLink(src: string) {
+	const preloadLink = new HTMLElement();
+	preloadLink.innerHTML = `<link rel="preload" as="image" href="${src}" fetchpriority="high">`;
+	// Return the link for use in frontmatter
+	return { preloadSrc: src };
+}
+
 const resolvedSlides =
 	slides.length > 0
 		? slides
@@ -38,6 +46,7 @@ const resolvedSlides =
 		  ];
 
 const hasMultipleSlides = resolvedSlides.length > 1;
+const firstSlideImage = resolvedSlides[0]?.immagine ? resolveImageSrc(resolvedSlides[0].immagine) : '';
 
 const sliderId = `slider-${Math.random().toString(36).slice(2)}`;
 
@@ -52,11 +61,19 @@ function resolveImageSrc(value: string | undefined) {
 
 <div class="slider_block swiper" id={sliderId}>
 	<div class="swiper-wrapper">
-		{resolvedSlides.map((slide) => (
+		{resolvedSlides.map((slide, index) => (
 			<div
 				class="swiper-slide single_slide"
-				style={slide.immagine ? `background-image: url('${resolveImageSrc(slide.immagine)}')` : ''}
+				style={slide.immagine ? `background-image: url('${resolveImageSrc(slide.immagine)}'); background-size: cover; background-position: center;` : ''}
 			>
+				{/* Preload first slide image for better LCP */}
+				{index === 0 && slide.immagine && (
+					<link rel="preload" as="image" href={resolveImageSrc(slide.immagine)} fetchpriority="high" />
+				)}
+				{/* Lazy load other slides */}
+				{index > 0 && slide.immagine && (
+					<link rel="preload" as="image" href={resolveImageSrc(slide.immagine)} fetchpriority="low" />
+				)}
 				{slide.titolo && <h1 data-aos="fade-up" data-aos-duration="1500">{slide.titolo}</h1>}
 				{slide.sottotitolo && <h2 data-aos="fade-up" data-aos-duration="1800">{slide.sottotitolo}</h2>}
 				{slide.label && slide.href && (

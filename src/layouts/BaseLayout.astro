@@ -53,17 +53,43 @@ try {
 		<meta name="generator" content={Astro.generator} />
 		<title>{resolvedTitle}</title>
 		{seoDescription && <meta name="description" content={seoDescription} />}
-		<link rel="stylesheet" href="/vendor/aos.css" />
-		<link rel="stylesheet" href="/vendor/swiper-bundle.min.css" />
-		<!-- Cloudflare Web Analytics -->
+		<!-- DNS prefetch for critical domains -->
+		<link rel="dns-prefetch" href="https://embeds.iubenda.com" />
+		<link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
+		<!-- Preconnect to critical resources -->
+		<link rel="preconnect" href={DIRECTUS_URL} />
+		<!-- Load non-critical CSS asynchronously -->
+		<link rel="stylesheet" href="/vendor/aos.css" media="print" onload="this.media='all'" />
+		<link rel="stylesheet" href="/vendor/swiper-bundle.min.css" media="print" onload="this.media='all'" />
+		<noscript>
+			<link rel="stylesheet" href="/vendor/aos.css" />
+			<link rel="stylesheet" href="/vendor/swiper-bundle.min.css" />
+		</noscript>
+		<!-- Cloudflare Web Analytics - Deferred -->
 		<script
 			defer
 			src="https://static.cloudflareinsights.com/beacon.min.js"
 			data-cf-beacon='{"token": "e50ba351768e489c93b362f78d5f2442"}'
 		></script>
 		<!-- End Cloudflare Web Analytics -->
-		<!-- Iubenda -->
-		<script type="text/javascript" src="https://embeds.iubenda.com/widgets/51cccd42-6c12-44c0-9f50-46a28ce0e030.js"></script>
+		<!-- Iubenda - Loaded after DOM ready -->
+		<script>
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', function() {
+					const script = document.createElement('script');
+					script.type = 'text/javascript';
+					script.async = true;
+					script.src = 'https://embeds.iubenda.com/widgets/51cccd42-6c12-44c0-9f50-46a28ce0e030.js';
+					document.head.appendChild(script);
+				});
+			} else {
+				const script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.async = true;
+				script.src = 'https://embeds.iubenda.com/widgets/51cccd42-6c12-44c0-9f50-46a28ce0e030.js';
+				document.head.appendChild(script);
+			}
+		</script>
 		<!-- End Iubenda -->
 	</head>
 	<body>

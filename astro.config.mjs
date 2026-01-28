@@ -30,11 +30,25 @@ export default defineConfig({
         port: '',
         pathname: '/assets/**'
       }
-    ]
+    ],
+    cacheDir: './.cache/images'
   },
   vite: {
     ssr: {
       noExternal: ['astro/jsx-runtime']
+    },
+    build: {
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: false,
+        },
+        mangle: true,
+      }
     }
-  }
+  },
+  // Optimize output
+  output: 'static',
+  // Enable compression
+  compressHTML: true,
 });
