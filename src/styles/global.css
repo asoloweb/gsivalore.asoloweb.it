@@ -156,7 +156,6 @@ a {
   width: 100%;
   align-items: center;
   justify-content: center;
-  height: 400px;
   flex-direction: column;
 }
 
@@ -227,6 +226,35 @@ a {
 }
 
 @media (max-width: 640px) {
+
+  .site-footer nav {
+    flex-direction: column;
+    gap:40px;
+  }
+
+  .hero_block, .hero_block_inverted {
+    flex-direction: column !important;
+    border-radius: 0 !important;
+  }
+
+  .page_header h1 {
+    text-align: center;
+    line-height: 52px;
+    font-size: 50px;
+  }
+
+  .MenuLogo {
+    height:65px;
+  }
+
+  .slider_block {
+    height:100vh;
+  }
+
+  .FooterItemsContainer {
+    flex-direction: column;
+    gap:20px;
+  }
 
   .MenuItemsContainer {
     position: absolute;

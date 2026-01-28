@@ -1,12 +1,13 @@
-// @ts-check
+//Sitemap
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 const directusUrl =
   process.env.PUBLIC_DIRECTUS_URL ||
   process.env.DIRECTUS_URL ||
-  'https://admin.asoloweb.it';
+  'https://gsivalore.asoloweb.it';
 let directusProtocol = 'https';
-let directusHostname = 'admin.asoloweb.it';
+let directusHostname = 'gsivalore.asoloweb.it';
 
 try {
   const parsed = new URL(directusUrl);
@@ -18,6 +19,8 @@ try {
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://gsivalore.it', // IMPORTANTISSIMO
+  integrations: [sitemap({ entryLimit: 50000 })],
   image: {
     domains: [directusHostname],
     remotePatterns: [
