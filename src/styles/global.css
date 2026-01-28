@@ -8,6 +8,11 @@
 @import "@fontsource/libre-bodoni/600.css";
 @import "@fontsource/libre-bodoni/700.css";
 
+
+html {
+    background:var(--blu);
+  }
+
 :root {
   --blu: #003147;
   --oro: #c1a776;
@@ -54,7 +59,7 @@ a {
 .site-header {
     background: var(--blu);
     color: var(--bianco);
-    border-top: 10px solid var(--oro);
+    border-top: 5px solid var(--oro);
     display: flex;
     height: 130px;
     border-bottom: 2px solid #f2f2f224;
@@ -227,9 +232,6 @@ a {
 
 @media (max-width: 640px) {
   
-  html {
-    background:var(--blu);
-  }
 
   .site-footer nav {
     flex-direction: column;
