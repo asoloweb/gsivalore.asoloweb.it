@@ -226,6 +226,10 @@ a {
 }
 
 @media (max-width: 640px) {
+  
+  html {
+    background:var(--blu);
+  }
 
   .site-footer nav {
     flex-direction: column;
