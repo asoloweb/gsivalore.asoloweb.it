@@ -5,9 +5,9 @@ import sitemap from '@astrojs/sitemap';
 const directusUrl =
   process.env.PUBLIC_DIRECTUS_URL ||
   process.env.DIRECTUS_URL ||
-  'https://gsivalore.asoloweb.it';
+  'https://admin.gsivalore.it';
 let directusProtocol = 'https';
-let directusHostname = 'gsivalore.asoloweb.it';
+let directusHostname = 'admin.gsivalore.it';
 
 try {
   const parsed = new URL(directusUrl);
